@@ -10,6 +10,9 @@ class EspecialidadSeeder extends Seeder
     public function run(): void
     {
         DB::table('especialidads')->insert([
+            'name' => 'Ciclo Básico']);
+
+        DB::table('especialidads')->insert([
         'name' => 'Informatica']);
         
         DB::table('especialidads')->insert([

@@ -64,9 +64,8 @@ class DatabaseSeeder extends Seeder
         }
 
         $cursos = [
-            ['name' => '7', 'especialidad_id' => 1, 'division_id' => 11],
-            ['name' => '1', 'especialidad_id' => 2, 'division_id' => 2],
-            // Añade más cursos si es necesario
+            ['name' => '7', 'especialidad_id' => 2, 'division_id' => 11],
+            ['name' => '1', 'especialidad_id' => 1, 'division_id' => 2],
         ];
         
         DB::table('cursos')->insert($cursos);

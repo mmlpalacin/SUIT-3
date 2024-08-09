@@ -10,7 +10,9 @@
             <thead>
                 <tr>
                     <th>alumnos</th>
-                    <th><a href="{{route('prece.asistencia.create', $curso)}}"><x-button>Tomar Asistencia</x-button></a></th>
+                    @can('prece.asistencia.create')
+                        <th><a href="{{route('prece.asistencia.create', $curso)}}"><x-button>Tomar Asistencia</x-button></a></th>
+                    @endcan   
                     <th colspan="2"></th>
                 </tr>
             </thead>

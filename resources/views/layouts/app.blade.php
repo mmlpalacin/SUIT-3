@@ -24,19 +24,19 @@
     <body class="font-sans antialiased">
 
         <div class="min-h-screen bg-green-100">
-            <nav  style="background-color: darkgreen">@yield('nav')</nav>
+            <nav style="background-color: darkgreen">@yield('nav')</nav>
                 <div class="mt-4 ml-4">
                     @yield('content')
                 </div>
-                <footer style="background-color:#333;color:#fff;text-align:center;padding:1em 0;width:100%;bottom:0;">
-                    <br>
-                    <p>&copy; 2024 cmc. Todos los derechos reservados.</p>
-                </footer>
                 @yield('scripts')
                     @stack('modals')
                  <!-- Scripts -->
                     @vite('resources/js/app.js')
                     @livewireScripts
         </div>
+        <footer class="border-b border-gray-100 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white text-center" style="background-color: #333">
+            <br>
+            &copy; 2024 cmc. Todos los derechos reservados.
+        </footer>
     </body>
 </html>

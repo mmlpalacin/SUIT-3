@@ -2,12 +2,22 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             
+            @php
+                // Obtén el rol del usuario autenticado
+                $userRole = Auth::user()->roles->first()->name ?? 'guest';
+            @endphp
             <!--anuncios-->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <div class="ms-3 relative">
+                    @if ($userRole === 'alumno')
+                        <a href="{{ route('anuncios.index') }}" class="inline-flex items-center px-3 py-2 text-sm leading-4 font-medium rounded-md text-white hover:text-white focus:outline-none focus: transition ease-in-out duration-150">Anuncios</a>
+                        </div>
+                    </div>
+                    @else
                 <x-dropdown align="left" width="60">
                     <x-slot name="trigger">
                         <span class="inline-flex rounded-md">
+                            @can('admin.anuncio.index')            
                             <button type="button" class="inline-flex items-center px-3 py-2 text-sm leading-4 font-medium rounded-md text-white hover:text-white focus:outline-none focus: transition ease-in-out duration-150">
                                 Anuncios
                             </button>
@@ -19,7 +29,6 @@
                                 Anuncios
                             </x-dropdown-link>
                         </div>
-                        @can('admin.anuncio.index')
                             <div class="w-60">
                                 <x-dropdown-link href="{{ route('admin.anuncio.index') }}">
                                     Lista de Anuncios
@@ -30,11 +39,11 @@
                                     Nuevo Anuncios
                                 </x-dropdown-link>
                             </div>
-                        @endcan
                     </x-slot>
                 </x-dropdown>
             </div>
-
+            @endcan
+            @endif
             @yield('personalizado')
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">

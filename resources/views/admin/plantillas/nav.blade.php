@@ -18,7 +18,7 @@
                     </x-dropdown>
                 </div>
                 <div class="w-60">
-                    <x-dropdown href="{{ route('register') }}">
+                    <x-dropdown href="{{ route('admin.register') }}">
                         Nuevo Usuario
                     </x-dropdown>
                 </div>

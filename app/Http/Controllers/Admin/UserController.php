@@ -51,43 +51,46 @@ class UserController extends Controller
         //asignar curso
         $cursos = $request->input('curso');
         if($cursos){
-        if ($user->hasRole('alumno')) {
-            $cursoId = $cursos[0] ?? null; 
-            $existingAssignment = Asignacion_de_Cursos::where('user_id', $user->id)->first();
+            if ($user->hasRole('alumno')) {
+                $cursoId = $cursos[0] ?? null; 
+                $existingAssignment = Asignacion_de_Cursos::where('user_id', $user->id)->first();
 
-            if ($existingAssignment) { // Si el alumno ya está asignado, actualiza el curso
-                $existingAssignment->curso_id = $cursoId;
-                $existingAssignment->save();
-            }else
-                Asignacion_de_Cursos::create([
-                'user_id' => $user->id,
-                'curso_id' => $cursoId,
-                'rol' => 'alumno',
-                ]);
-        }else{
-
-            $selectedCursoIds = $request->curso;
-
-            // Obtener los IDs de los cursos previamente asignados
-            $existingCursoIds = Asignacion_de_Cursos::where('user_id', $user->id)->pluck('curso_id')->toArray();
-
-            // Eliminar asignaciones para cursos que no están en la lista seleccionada
-            Asignacion_de_Cursos::where('user_id', $user->id)
-                ->whereNotIn('curso_id', $selectedCursoIds)
-                ->delete();
-
-            foreach ($selectedCursoIds as $cursoId) {
-                Asignacion_de_Cursos::create([
+                if ($existingAssignment) { // Si el alumno ya está asignado, actualiza el curso
+                    $existingAssignment->curso_id = $cursoId;
+                    $existingAssignment->save();
+                }else
+                    Asignacion_de_Cursos::create([
                     'user_id' => $user->id,
                     'curso_id' => $cursoId,
-                    'rol' => 'otro',
-                ]);
-            }
-        }}else{
+                    'rol' => 'alumno',
+                    ]);
+                }else{
+
+                    $selectedCursoIds = $request->curso;
+
+                    // Obtener los IDs de los cursos previamente asignados
+                    $existingCursoIds = Asignacion_de_Cursos::where('user_id', $user->id)->pluck('curso_id')->toArray();
+
+                    // Eliminar asignaciones para cursos que no están en la lista seleccionada
+                    Asignacion_de_Cursos::where('user_id', $user->id)
+                        ->whereNotIn('curso_id', $selectedCursoIds)
+                        ->delete();
+
+                    foreach ($selectedCursoIds as $cursoId) {
+                        if (!in_array($cursoId, $existingCursoIds)) {
+                            Asignacion_de_Cursos::create([
+                                'user_id' => $user->id,
+                                'curso_id' => $cursoId,
+                                'rol' => 'otro',
+                            ]);
+                        }
+                    }
+                }
+            }else{
             Asignacion_de_Cursos::where('user_id', $user->id)->delete();
         }
 
-        return redirect()->route('admin.users.index')->with('info','Se asignó el rol con exito');
+        return redirect()->route('admin.users.index')->with('info','Asignado con exito');
 
     }
     public function destroy(user $user)

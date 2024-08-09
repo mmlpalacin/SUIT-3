@@ -23,12 +23,8 @@ class CrearCursoController extends Controller
         $especialidades = Especialidad::all();
         $divisiones = Division::all();
         $cursos = Curso::all();
-        $role = Role::where('name', 'preceptor')->first();
-
-        $preceptores = User::whereHas('roles', function ($query) use ($role) {
-            $query->where('id', $role->id);
-        })->get();
-        return view('admin.cursos.create', compact('especialidades', 'divisiones', 'preceptores', 'cursos', 'curso'));
+        
+        return view('admin.cursos.create', compact('especialidades', 'divisiones', 'cursos', 'curso'));
     }
 
     public function store(Request $request)
@@ -54,13 +50,8 @@ class CrearCursoController extends Controller
     {
         $especialidades = Especialidad::all();
         $divisiones = Division::all();
-        $role = Role::where('name', 'preceptor')->first();
 
-        $preceptores = User::whereHas('roles', function ($query) use ($role) {
-            $query->where('id', $role->id);
-        })->get();
-
-        return view('admin.cursos.edit', compact('especialidades', 'divisiones', 'preceptores', 'curso'));
+        return view('admin.cursos.edit', compact('especialidades', 'divisiones', 'curso'));
     }  
 
 
@@ -70,7 +61,7 @@ class CrearCursoController extends Controller
             'name' => 'required|in:1,2,3,4,5,6,7',
             'especialidad_id' => 'nullable|exists:especialidads,id',
             'division_id' => 'required|exists:divisions,id',
-            'turno' => 'required|in:1,2,3',
+            'turno' => 'required|in:mañana,tarde,noche',
         ]);
     
         $curso->update($request->all());

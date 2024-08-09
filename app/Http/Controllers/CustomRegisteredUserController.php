@@ -34,6 +34,6 @@ class CustomRegisteredUserController extends Controller
 
         $this->creator->create($request->all());
 
-        return redirect()->route('admin.users.index')->with('info', 'Recurso creado exitosamente.');;
+        return redirect()->route('admin.users.index')->with('info', 'Usuario creado exitosamente.');;
     }
 }

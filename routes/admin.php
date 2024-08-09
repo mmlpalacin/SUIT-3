@@ -18,6 +18,6 @@ route::resource('cursos',CrearCursoController::class)->names('admin.cursos');
 route::resource('users', UserController::class)->names('admin.users');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get(RoutePath::for('register', '/register'), [CustomRegisteredUserController::class, 'create'])->name('register');
+    Route::get(RoutePath::for('register', '/register'), [CustomRegisteredUserController::class, 'create'])->name('admin.register');
     Route::post(RoutePath::for('register', '/register'), [CustomRegisteredUserController::class, 'store']);
 });

@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('title', 'Inicio')
+@section('title', 'Perfil')
 @section('nav')
-@include('components.nav-ifs')
+    @include('components.nav-ifs')
 @endsection
 @section('content')
     <div class="container d-flex flex-column justify-content-center align-items-center">
@@ -18,15 +18,20 @@
         <div>
             <div class="font-medium text-2xl text-center text-gray-800">{{ Auth::user()->name }}</div>
             <div class="font-medium  text-xl  text-center text-gray-500">{{ Auth::user()->email }}</div>
-            @foreach($cursos as $asignacion)
-            <div class="font-medium  text-center text-gray-300">
-                    {{ $asignacion->curso->name }} ° {{ $asignacion->curso->division_id }}
-                    @if ($asignacion->curso->especialidad_id)
-                    <br>
-                        {{$asignacion->curso->especialidad->name}}
-                    @endif
-            </div>
-            @endforeach
+            <x-section-border />
+        </div>
+        <br>
+        <div class="card text-center">
+            <table class="table table-striped">
+                @foreach($cursos as $asignacion)
+                        <tr>
+                            <td>
+                                <a href="{{ route('prece.curso.show', $asignacion->curso->id) }}">{{ $asignacion->curso->name }} ° {{ $asignacion->curso->division_id }}</a>
+                            </td>
+                            <td>{{ $asignacion->curso->especialidad->name }}</td>
+                        </tr>
+                @endforeach
+            </table>
         </div>
 
         @if ($role === 'alumno')
@@ -46,7 +51,6 @@
                         </tr>
                     @endforeach
                 </tbody>
-            </table>
-    </div>  
-@endif
+            </table>  
+        @endif
 @endsection

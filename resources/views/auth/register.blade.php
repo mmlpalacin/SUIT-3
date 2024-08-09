@@ -1,4 +1,5 @@
 <x-guest-layout>
+    @include('components.nav-ifs')
     <x-authentication-card>
         <x-slot name="logo">
             <x-authentication-card-logo />
@@ -6,7 +7,7 @@
 
         <x-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('admin.register') }}">
             @csrf
 
             <div>
@@ -62,10 +63,6 @@
             @endif
 
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
                 <x-button class="ms-4">
                     {{ __('Register') }}
                 </x-button>

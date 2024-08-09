@@ -47,21 +47,10 @@
 
             <div class="form-group">
                 <x-label for="turno">Turno</x-label>
-                Mañana<input type="radio" id="turno1" name="turno" value="1" class="border-gray-300 ml-1 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mr-4" @if(old('turno', $curso->turno ?? '') == '1') checked @endif>
-                Tarde<input type="radio" id="turno2" name="turno" value="2" class="border-gray-300 ml-1 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mr-4" @if(old('turno', $curso->turno ?? '') == '2') checked @endif>
-                Noche<input type="radio" id="turno3" name="turno" value="3" class="border-gray-300 ml-1 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mr-4" @if(old('turno', $curso->turno ?? '') == '3') checked @endif>
-            </div>
-
-            <br>
-
-            <div class="form-group">
-                <x-label for="preceptor">Preceptor</x-label>
-                <select id="preceptor" name="user_id">
-                    @foreach ($preceptores as $preceptor)
-                        <option value="{{ $preceptor->id }}" @if(old('preceptor', $curso->user_id ?? '') == $preceptor->id) selected @endif>{{ $preceptor->name }}</option>
-                    @endforeach
-                </select>
-                @error('user_id')
+                Mañana<input type="radio" id="turno1" name="turno" value="mañana" @if (old('turno', $curso->turno ?? '') == 'mañana') checked @endif class="border-gray-300 ml-1 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mr-4">
+                Tarde<input type="radio" id="turno2" name="turno" value="tarde" @if (old('turno', $curso->turno ?? '') == 'tarde') checked @endif class="border-gray-300 ml-1 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mr-4">
+                Noche<input type="radio" id="turno3" name="turno" value="noche" @if (old('turno', $curso->turno ?? '') == 'noche') checked @endif class="border-gray-300 ml-1 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mr-4">
+                @error('turno')
                     <div style="color: red;">{{ $message }}</div>
                 @enderror
             </div>

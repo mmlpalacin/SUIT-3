@@ -9,7 +9,7 @@ class Curso extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'division_id', 'especialidad_id'];
 
     public function especialidad(){
         return $this->belongsTo(Especialidad::class);
