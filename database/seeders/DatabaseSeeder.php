@@ -23,25 +23,29 @@ class DatabaseSeeder extends Seeder
         $this->call(EspecialidadSeeder::class);
 
         User::factory()->create([
-        'name' => 'Milagros Palacin',
+        'name' => 'Milagros',
+        'lastname' => 'Palacin',
         'email' => 'milagrosp.urena@gmail.com',
         'password' =>bcrypt('47297143')
         ])->assignRole('alumno');
 
         User::factory()->create([
-            'name' => 'Palacin',
+            'name' => 'Mili',
+            'lastname' => 'Palacin',
             'email' => 'milagrospalacinurena@gmail.com',
             'password' =>bcrypt('47297143')
             ])->assignRole('admin');
 
         User::factory()->create([
         'name' => 'Milagros',
+        'lastname' => 'Ureña',
         'email' => 'mlmstylinson@gmail.com',
         'password' =>bcrypt('47297143')
         ])->assignRole('preceptor');
 
         User::factory()->create([
-            'name' => 'M Palacin',
+            'name' => 'M',
+                'lastname' => 'Palacin',
             'email' => 'mmlstylinson@gmail.com',
             'password' =>bcrypt('47297143')
             ])->assignRole('profesor');
@@ -54,6 +58,13 @@ class DatabaseSeeder extends Seeder
             $user->assignRole($randomRole);
         }
 
+        $cursos = [
+            ['name' => '7', 'especialidad_id' => 2, 'division_id' => 11],
+            ['name' => '1', 'especialidad_id' => 1, 'division_id' => 2],
+        ];
+        
+        DB::table('cursos')->insert($cursos);
+
         $anuncios = Anuncio::factory(10)->create();
 
         foreach ($anuncios as $anuncio){
@@ -62,12 +73,5 @@ class DatabaseSeeder extends Seeder
                 'imageable_type' => Anuncio::class
             ]);
         }
-
-        $cursos = [
-            ['name' => '7', 'especialidad_id' => 2, 'division_id' => 11],
-            ['name' => '1', 'especialidad_id' => 1, 'division_id' => 2],
-        ];
-        
-        DB::table('cursos')->insert($cursos);
     }
 }

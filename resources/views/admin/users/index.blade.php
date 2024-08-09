@@ -9,6 +9,6 @@
             <strong>{{session('info')}}</strong>
         </div>
     @endif
-    <a href="{{route('register')}}"><x-button>Nuevo Usuario</x-button></a>
+    <a href="{{route('admin.register')}}"><x-button>Nuevo Usuario</x-button></a>
     @livewire('user-index')
 @endsection

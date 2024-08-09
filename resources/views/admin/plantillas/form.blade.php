@@ -43,7 +43,20 @@ form {
             <img style="max-width: 200px;vertical-align: middles;" src="{{Storage::url($anuncio->image->url)}}">
         @endisset
     </div>
-
+    
+    @can('anuncio.curso')
+    <div class="post">
+        @foreach ($cursos as $curso)
+            <x-label for="curso">
+                {{ $curso->name }}°{{ $curso->division_id }}
+                <input type="radio" name="curso_id" value="{{ $curso->id }}"
+                    @if(old('curso_id', $anuncio->curso_id ?? '') == $curso->id) checked @endif
+                    class="rm-1">
+            </x-label>
+        @endforeach
+    </div>
+@endcan
+    
     <div>
         <br>
         <h3>Estado:</h3>

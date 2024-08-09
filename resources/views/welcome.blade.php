@@ -25,9 +25,12 @@
         @foreach ($anuncios as $anuncio)
             <div class="w-full sm:max-w-lg mt-6 px-6 py-4 bg-gray-100 shadow-md overflow-hidden sm:rounded-lg text-center">
                 <p class="mb-1 card-text small text-muted text-left">{{$anuncio->published_at}}</p>
+                    @if ($anuncio->curso)
+                    <p class="mb-1 card-text small text-muted text-left">{{$anuncio->curso->name}} ° {{$anuncio->curso->division_id}}</p>
+                    @endif
+
                 <h3 class="h4 font-weight-bold">{{$anuncio->title}}</h3>
-                    <p class="card-text">{!!$anuncio->body!!}</p>
-                    @if($anuncio->image)
+                    <p class="card-text">{!!$anuncio->body!!}</p>                    @if($anuncio->image)
                         <td><img class="img-fluid mx-auto d-block sm:rounded-lg" src="{{Storage::url($anuncio->image->url)}}"></td>
                     @endif
             </div>

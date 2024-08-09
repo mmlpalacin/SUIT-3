@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Image;
 use App\Models\Anuncio;
 use App\Http\Requests\AnuncioRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Curso;
 
 class CrearAnuncioController extends Controller
 {
@@ -23,7 +24,12 @@ class CrearAnuncioController extends Controller
     }
 
     public function create (Anuncio $anuncio){
-        return view('anuncios.create');
+        $user_id = Auth::id();
+        $cursos = Curso::whereHas('asignaciones', function ($query) use ($user_id) {
+            $query->where('user_id', $user_id);
+        })->get();
+        
+        return view('anuncios.create', compact('cursos'));
     }
     
     public function store (AnuncioRequest $request){
@@ -53,7 +59,12 @@ class CrearAnuncioController extends Controller
     {
         $this->authorize('author', $anuncio);
         
-        return view('anuncios.edit', compact('anuncio'));
+        $user_id = Auth::id();
+        $cursos = Curso::whereHas('asignaciones', function ($query) use ($user_id) {
+            $query->where('user_id', $user_id);
+        })->get();
+
+        return view('anuncios.edit', compact('anuncio', 'cursos'));
     }
     public function update(AnuncioRequest $request, Anuncio $anuncio)
     {

@@ -6,7 +6,6 @@ use App\Actions\Fortify\CreateNewUser;
 use Laravel\Fortify\Fortify;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Routing\Controller;
 
 class CustomRegisteredUserController extends Controller

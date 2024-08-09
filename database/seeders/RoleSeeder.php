@@ -37,10 +37,10 @@ class RoleSeeder extends Seeder
 
         //preceptor
         Permission::create(['name' => 'prece.curso.index', 'description' => 'Ver lista de sus cursos asignados'])->syncRoles([$role1, $role2]); //si quieres asignar a varios roles
-        Permission::create(['name' => 'prece.curso.show', 'description' => 'Ver detalles de un curso asignado'])->syncRoles([$role1, $role2]); //si quieres asignar a varios roles
-        Permission::create(['name' => 'prece.asistencia.index', 'description' => 'Ver planilla de asistencia'])->syncRoles([$role1, $role2]); //si quieres asignar a varios roles
-        Permission::create(['name' => 'prece.asistencia.create', 'description' => 'Ver planilla de asistencia completa'])->syncRoles([$role1, $role2]); //si quieres asignar a varios roles
+        Permission::create(['name' => 'prece.asistencia.index', 'description' => 'Ver planilla de asistencia'])->syncRoles([$role2]); //si quieres asignar a varios roles
+        Permission::create(['name' => 'prece.asistencia.create', 'description' => 'Ver planilla de asistencia completa'])->syncRoles([$role2]); //si quieres asignar a varios roles
 
+        Permission::create(['name' => 'anuncio.curso', 'description' => 'Seleccionar para que curso es el anuncio'])->syncRoles([$role2, $role3]); //si quieres asignar a varios roles
         //profesor
 
 

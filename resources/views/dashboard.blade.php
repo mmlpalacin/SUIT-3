@@ -35,6 +35,7 @@
         </div>
 
         @if ($role === 'alumno')
+        <x-section-border />
         <h2 class="h3">Asistencias:</h2>
             <table class="table table-striped">
                 <thead>
@@ -53,4 +54,5 @@
                 </tbody>
             </table>  
         @endif
+        <x-section-border />
 @endsection
